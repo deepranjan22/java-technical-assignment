@@ -30,7 +30,9 @@ class BasketTest {
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
                 multipleItemsPricedByWeight(),
-                threeItemsPricedTwoForOneUnit()
+                threeItemsPricedTwoForOneUnit(),
+                threeItemsPriceHalfPricedDiscount(),
+                threeKiloHalfPrice()
         );
     }
 
