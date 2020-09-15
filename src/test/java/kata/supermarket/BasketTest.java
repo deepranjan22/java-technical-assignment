@@ -29,7 +29,8 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
-                multipleItemsPricedByWeight()
+                multipleItemsPricedByWeight(),
+                threeItemsPricedTwoForOneUnit()
         );
     }
 
@@ -50,6 +51,18 @@ class BasketTest {
 
     private static Arguments aSingleItemPricedPerUnit() {
         return Arguments.of("a single item priced per unit", "0.49", Collections.singleton(aPintOfMilk()));
+    }
+
+    private static Arguments threeItemsPricedTwoForOneUnit() {
+        return Arguments.of("2 for one priced discount", "5.00", Collections.singleton(threePencilsWithTwoForOneDiscount()));
+    }
+
+    private static Arguments threeItemsPriceHalfPricedDiscount() {
+        return Arguments.of("2 for one priced discount", "3.75", Collections.singleton(threePencilsWithHalfPriceeDiscount()));
+    }
+
+    private static Arguments threeKiloHalfPrice() {
+        return Arguments.of("2 for one priced discount", "7.50", Collections.singleton(threeKiloAndHalfPRiceDiscountOVerOneKilo()));
     }
 
     private static Arguments noItems() {
@@ -79,4 +92,17 @@ class BasketTest {
     private static Item twoHundredGramsOfPickAndMix() {
         return aKiloOfPickAndMix().weighing(new BigDecimal(".2"));
     }
+
+    private static Item threePencilsWithTwoForOneDiscount() {
+        return new Product(new BigDecimal("2.50")).unitOf(3).setDiscount(new BuyTwoForOneDiscount());
+    }
+
+    private static Item threePencilsWithHalfPriceeDiscount() {
+        return new Product(new BigDecimal("2.50")).unitOf(3).setDiscount(new HalfPriceDiscountByUnit());
+    }
+
+    private static Item threeKiloAndHalfPRiceDiscountOVerOneKilo() {
+        return new WeighedProduct(new BigDecimal("5.0")).weighing(new BigDecimal("3.0")).setDiscount(new HalPriceDiscountPerOneKilo());
+    }
+
 }

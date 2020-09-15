@@ -14,7 +14,11 @@ public class Product {
         return pricePerUnit;
     }
 
-    public Item oneOf() {
+    public ItemByUnit oneOf() {
         return new ItemByUnit(this);
+    }
+
+    public ItemByUnit unitOf(int units) {
+        return new ItemByUnit(this, units);
     }
 }
