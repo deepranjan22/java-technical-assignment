@@ -31,8 +31,10 @@ class BasketTest {
                 aSingleItemPricedByWeight(),
                 multipleItemsPricedByWeight(),
                 threeItemsPricedTwoForOneUnit(),
-                threeItemsPriceHalfPricedDiscount(),
-                threeKiloHalfPrice()
+                threeItemsPriceHalfPricedDiscountPerUnit(),
+                threeKiloHalfPricePricedByWeight(),
+                sixPencilsWithThreeItemsForThePriceOfTwoPricedPerUnit()
+
         );
     }
 
@@ -56,15 +58,20 @@ class BasketTest {
     }
 
     private static Arguments threeItemsPricedTwoForOneUnit() {
-        return Arguments.of("2 for one priced discount", "5.00", Collections.singleton(threePencilsWithTwoForOneDiscount()));
+        return Arguments.of("2 for one priced discount", "2.00", Collections.singleton(threePencilsWithTwoForOneDiscount()));
     }
 
-    private static Arguments threeItemsPriceHalfPricedDiscount() {
-        return Arguments.of("2 for one priced discount", "3.75", Collections.singleton(threePencilsWithHalfPriceeDiscount()));
+    private static Arguments threeItemsPriceHalfPricedDiscountPerUnit() {
+        return Arguments.of("half priced discount priced per unit", "3.75", Collections.singleton(threePencilsWithHalfPriceeDiscount()));
     }
 
-    private static Arguments threeKiloHalfPrice() {
-        return Arguments.of("2 for one priced discount", "7.50", Collections.singleton(threeKiloAndHalfPRiceDiscountOVerOneKilo()));
+    private static Arguments sixPencilsWithThreeItemsForThePriceOfTwoPricedPerUnit() {
+        return Arguments.of("Discount Price for three items for the price of Two, per unit", "9.00", Collections.singleton(sixPencilsWithThreeItemsForThePriceOfTwo()));
+    }
+
+
+    private static Arguments threeKiloHalfPricePricedByWeight() {
+        return Arguments.of("half price discount over one kilo priced by weight", "7.50", Collections.singleton(threeKiloAndHalfPRiceDiscountOVerOneKilo()));
     }
 
     private static Arguments noItems() {
@@ -96,11 +103,15 @@ class BasketTest {
     }
 
     private static Item threePencilsWithTwoForOneDiscount() {
-        return new Product(new BigDecimal("2.50")).unitOf(3).setDiscount(new BuyTwoForOneDiscount());
+        return new Product(new BigDecimal(".75")).unitOf(5).setDiscount(new BuyTwoForOnePoundDiscount());
     }
 
     private static Item threePencilsWithHalfPriceeDiscount() {
         return new Product(new BigDecimal("2.50")).unitOf(3).setDiscount(new HalfPriceDiscountByUnit());
+    }
+
+    private static Item sixPencilsWithThreeItemsForThePriceOfTwo() {
+        return new Product(new BigDecimal("1.50")).unitOf(9).setDiscount(new ThreeItemsForThePriceOfTwo());
     }
 
     private static Item threeKiloAndHalfPRiceDiscountOVerOneKilo() {
